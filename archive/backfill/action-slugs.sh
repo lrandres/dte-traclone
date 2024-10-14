@@ -10,15 +10,15 @@ echo "Processing file: $filename"
 
 # Loop through each line in the file
 while read -r line; do
-    # Extract the timestamp (1st column) and slug (2nd column)
-    timestamp=$(echo "$line" | awk '{print $1}')
-    slug=$(echo "$line" | awk '{print $2}')
+    # Extract the run ID (11th column) and timestamp (13th column)
+    run_id=$(echo "$line" | awk '{print $11}')
+    timestamp=$(echo "$line" | awk '{print $13}')
     
-    # Debugging: Print the timestamp and slug being processed
-    echo "Processing: $timestamp $slug"
+    # Debugging: Print the run ID and timestamp being processed
+    echo "Processing: $run_id $timestamp"
     
-    # Append the timestamp and slug to the output file
-    echo "$timestamp $slug" >> "$output_file"
+    # Append the run ID (slug) and timestamp to the output file
+    echo "$run_id $timestamp" >> "$output_file"
 done < "$filename"
 
-echo "Slugs saved to $output_file"
+echo "Slugs and timestamps saved to $output_file"
